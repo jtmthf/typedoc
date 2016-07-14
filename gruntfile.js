@@ -147,4 +147,10 @@ module.exports = function(grunt)
             FS.writeFileSync(file, FS.readFileSync(file, {encoding:'utf-8'}).replace(gitHubRegExp, 'https://github.com/sebastian-lenz/typedoc/blob/master/examples'));
         });
     });
+    grunt.registerTask('build_and_test:force', function() {
+        grunt.option('force', true);
+        grunt.task.run('default');
+        grunt.task.run('specs');
+        grunt.task.run('mocha_istanbul:coverage');
+    });
 };
